@@ -7,7 +7,7 @@ function agregarPuntosPorNivel(puntos) {
 }
 //hola
 //hihi
-
+//test
 function aplicarBono() {
     let puntosConBonus = 0;
     let bonoActivo = false;
