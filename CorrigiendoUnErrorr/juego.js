@@ -5,6 +5,7 @@ function agregarPuntosPorNivel(puntos) {
     puntuacionTotal = puntuacionTotal + puntos;
     console.log(`Puntuación después del nivel: ${puntuacionTotal}`);
 }
+//hola
 
 function aplicarBono() {
     let puntosConBonus = 0;

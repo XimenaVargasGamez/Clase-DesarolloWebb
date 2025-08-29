@@ -5,7 +5,7 @@ function showResult(elementId, data, isSuccess = true) {
     element.textContent = JSON.stringify(data, null, 2);
     element.className = `result ${isSuccess ? 'success' : 'error'}`;
 }
-
+//hi
 function clearResult(elementId) {
     const element = document.getElementById(elementId);
     element.textContent = '';
