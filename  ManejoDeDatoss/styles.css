@@ -1,0 +1,103 @@
+body {
+    font-family: Arial, sans-serif;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f0ecee;
+}
+
+.container {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #201204;
+    margin-bottom: 30px;
+}
+
+h2 {
+    text-align: center;
+    color: #201204;
+}
+
+.section {
+    margin-bottom: 30px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.section h3 {
+    margin-top: 0;
+    color: #201204;
+}
+
+input, button {
+    padding: 8px 12px;
+    margin: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+input {
+    width: 200px;
+}
+
+button {
+    background-color: #fc9ab8;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #e45882;
+}
+
+.result {
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 4px;
+    white-space: pre-wrap;
+}
+
+.success {
+    background-color: #cbe0d0;
+    border: 1px solid #a7c4ae;
+    color: #3e5242;
+}
+
+.error {
+    background-color: #ffe7f2;
+    border: 1px solid #ff95b3;
+    color: #e45882;
+}
+
+.sample-cards {
+    background-color: #fff1f8;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.sample-cards h4 {
+    color: #201204;
+    margin-top: 0;
+}
+
+.card-info {
+    font-family: monospace;
+    font-size: 12px;
+    margin: 5px 0;
+}
+
+.WelcomeBox {
+    background-color: #ffe7f2;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}

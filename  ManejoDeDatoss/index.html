@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cajero automatico</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+
+        <h2>Cajero Automatico</h2>
+
+        <div class="WelcomeBox">
+            <h1>🌸 Bienvenido 🌸</h1>
+        </div>
+
+        <br>
+        
+        <div class="sample-cards">
+            <h4>Tarjetas muestra para testing:</h4>
+            <div class="card-info">John Doe: 1234567890123456 / PIN: 1234</div>
+            <div class="card-info">Jane Doe: 9876543210987654 / PIN: 5678</div>
+            <div class="card-info">Average Joe: 5432109876543210 / PIN: 9012</div>
+        </div>
+
+        <div class="section">
+            <h3>Validación de Tarjeta</h3>
+            <input type="number" id="validateCardNumber" placeholder="Numero de tarjeta" maxlength="16">
+            <input type="number" id="validatePin" placeholder="PIN" maxlength="4">
+            <button onclick="validateCard()">Validar</button>
+            <div id="validateResult" class="result"></div>
+        </div>
+
+        <div class="section">
+            <h3>Depositar Dinero</h3>
+            <input type="number" id="depositCardNumber" placeholder="Número de tarjeta" maxlength="16">
+            <input type="number" id="depositAmount" placeholder="Cantidad" step="0.01">
+            <button onclick="deposit()">Depositar</button>
+            <div id="depositResult" class="result"></div>
+        </div>
+
+        <div class="section">
+            <h3>Retirar Dinero</h3>
+            <input type="number" id="withdrawCardNumber" placeholder="Número de tarjeta" maxlength="16">
+            <input type="number" id="withdrawAmount" placeholder="Cantidad" step="0.01">
+            <button onclick="withdraw()">Retirar</button>
+            <div id="withdrawResult" class="result"></div>
+        </div>
+
+        <div class="section">
+            <h3>Consultar Saldo</h3>
+            <input type="number" id="balanceCardNumber" placeholder="Número de tarjeta" maxlength="16">
+            <button onclick="checkBalance()">Consultar</button>
+            <div id="balanceResult" class="result"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
