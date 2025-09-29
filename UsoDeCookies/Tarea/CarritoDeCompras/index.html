@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito de Compras</title>
+</head>
+
+<body>
+    <h1>Productos Disponibles</h1>
+    <div id="productos"></div>
+
+    <h2>Carrito</h2>
+    <div id="carrito"></div>
+    <button id="finalizarCompra">Finalizar Compra</button>
+
+    <script>
+        async function cargarProductos() {
+            const response = await fetch('/productos');
+            const productos = await response.json();
+
+            const productosDiv = document.getElementById('productos');
+            productosDiv.innerHTML = '';
+
+            productos.forEach(producto => {
+                const div = document.createElement('div');
+                div.innerHTML = `
+          ${producto.nombre} 
+          <button onclick="agregarAlCarrito(${producto.id})">Añadir al carrito</button>
+        `;
+                productosDiv.appendChild(div);
+            });
+        }
+
+        function agregarAlCarrito(idProducto) {
+            let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+            carrito.push(idProducto);
+            localStorage.setItem('carrito', JSON.stringify(carrito));
+            mostrarCarrito();
+        }
+
+        async function mostrarCarrito() {
+            const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+            const response = await fetch('/productos');
+            const productos = await response.json();
+
+            const carritoDiv = document.getElementById('carrito');
+            carritoDiv.innerHTML = '';
+
+            if (carrito.length === 0) {
+                carritoDiv.innerHTML = '<p>El carrito está vacío</p>';
+                return;
+            }
+
+            carrito.forEach(idProducto => {
+                const producto = productos.find(p => p.id === idProducto);
+                if (producto) {
+                    const div = document.createElement('div');
+                    div.textContent = producto.nombre;
+                    carritoDiv.appendChild(div);
+                }
+            });
+        }
+
+        async function finalizarCompra() {
+            const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+
+            if (carrito.length === 0) {
+                alert('El carrito está vacío');
+                return;
+            }
+
+            const response = await fetch('/comprar', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ productosIds: carrito })
+            });
+
+            const resultado = await response.json();
+            alert(resultado.mensaje);
+            localStorage.removeItem('carrito');
+            mostrarCarrito();
+        }
+
+        document.getElementById('finalizarCompra').addEventListener('click', finalizarCompra);
+
+        cargarProductos();
+        mostrarCarrito();
+    </script>
+</body>
+
+</html>
