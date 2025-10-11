@@ -1,8 +1,8 @@
 const express = require( 'express');
 const app = express();
 const port = 3000;
-
 const fs = require('fs');
+
 app.get('/crear.log', (req, res) => {
     const fecha = new Date().toLocalestring();
         fs.writeFile('log.txt', `Log creado en: $(fecha}`, (error) => {

@@ -2,6 +2,7 @@ const express = require( 'express');
 const app = express();
 const port = 3000;
 const upload = multer({ dest: 'uploads/' });
+const fs = require('fs');
 
 app.use(express.static(__dirname));
 

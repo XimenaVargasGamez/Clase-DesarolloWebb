@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Control de Servidores</title>
+    <style>
+        .resaltado {
+            background-color: yellow;
+        }
+    </style>
+</head>
+<body>
+    <h1>Panel de Control - Servidores Virtuales</h1>
+
+    <h2>Crear Nuevo Servidor</h2>
+    <input type="text" id="nombreServidor" placeholder="Nombre del servidor">
+    <button onclick="crearServidor()">Crear Servidor</button>
+
+    <hr>
+
+    <div id="listaServidores"></div>
+
+    <script>
+        window.onload = function() {
+            cargarServidores();
+        };
+
+        function cargarServidores() {
+            fetch('/api/servidores')
+                .then(response => response.json())
+                .then(servidores => {
+                    mostrarServidores(servidores);
+                })
+                .catch(error => {
+                    console.log('Error al cargar servidores:', error);
+                });
+        }
+
+        function mostrarServidores(servidores) {
+            const container = document.getElementById('listaServidores');
+            
+            if (servidores.length === 0) {
+                container.innerHTML = '<p>No tienes servidores creados.</p>';
+                return;
+            }
+
+            const ultimoServidor = localStorage.getItem('ultimoServidor');
+
+            let html = '<h2>Mis Servidores</h2>';
+            
+            servidores.forEach(servidor => {
+                const claseResaltado = servidor.id == ultimoServidor ? 'resaltado' : '';
+                
+                html += `
+                    <div class="${claseResaltado}">
+                        <h3>${servidor.nombre}</h3>
+                        <p>ID: ${servidor.id}</p>
+                        <p>Estado: ${servidor.estado}</p>
+                        <button onclick="encenderServidor(${servidor.id})">Encender</button>
+                        <button onclick="apagarServidor(${servidor.id})">Apagar</button>
+                        <button onclick="hacerBackup(${servidor.id})">Backup</button>
+                        <hr>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+
+        function crearServidor() {
+            const nombre = document.getElementById('nombreServidor').value;
+            
+            if (!nombre) {
+                alert('Debes escribir un nombre para el servidor');
+                return;
+            }
+
+            fetch('/api/crear-servidor', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ nombre: nombre })
+            })
+            .then(response => response.json())
+            .then(servidor => {
+                alert('Servidor creado: ' + servidor.nombre);
+                document.getElementById('nombreServidor').value = '';
+                
+                localStorage.setItem('ultimoServidor', servidor.id);
+                
+                cargarServidores();
+            })
+            .catch(error => {
+                alert('Error al crear servidor');
+                console.log(error);
+            });
+        }
+
+        function encenderServidor(id) {
+            fetch('/api/encender/' + id, {
+                method: 'POST'
+            })
+            .then(response => response.json())
+            .then(servidor => {
+                alert('Servidor encendido: ' + servidor.nombre);
+                
+                localStorage.setItem('ultimoServidor', servidor.id);
+                
+                cargarServidores();
+            })
+            .catch(error => {
+                alert('Error al encender servidor');
+                console.log(error);
+            });
+        }
+
+        function apagarServidor(id) {
+            fetch('/api/apagar/' + id, {
+                method: 'POST'
+            })
+            .then(response => response.json())
+            .then(servidor => {
+                alert('Servidor apagado: ' + servidor.nombre);
+                
+                localStorage.setItem('ultimoServidor', servidor.id);
+                
+                cargarServidores();
+            })
+            .catch(error => {
+                alert('Error al apagar servidor');
+                console.log(error);
+            });
+        }
+
+        function hacerBackup(id) {
+            fetch('/api/backup/' + id, {
+                method: 'POST'
+            })
+            .then(response => response.text())
+            .then(mensaje => {
+                alert(mensaje);
+                
+                localStorage.setItem('ultimoServidor', id);
+                
+                cargarServidores();
+            })
+            .catch(error => {
+                alert('Error al hacer backup');
+                console.log(error);
+            });
+        }
+    </script>
+</body>
+</html>
