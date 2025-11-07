@@ -8,6 +8,8 @@ createRestaurant example
 }
 */
 
+const API_URL = process.env.API_URL || 'http://localhost:3000';
+
 async function createRestaurant(params) {
     const response = await fetch(`${API_URL}/restaurants`, {
         method: 'POST',
@@ -76,5 +78,14 @@ async function updateRestaurant(restaurantId, restaurantData) {
     console.log(data);
     return data;
 }
+
+// Export functions for use in other modules
+module.exports = {
+    createRestaurant,
+    getRestaurants,
+    getRestaurantByID,
+    deleteRestaurantByID,
+    updateRestaurant
+};
 
 //post put delete

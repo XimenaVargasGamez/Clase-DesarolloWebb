@@ -1,253 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sede de Cazadores</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-            color: #ffffff;
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 40px;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .header h1 {
-            font-size: 3rem;
-            color: #64b5f6;
-            margin-bottom: 10px;
-            text-shadow: 0 0 20px rgba(100, 181, 246, 0.5);
-        }
-
-        .header p {
-            font-size: 1.2rem;
-            color: #bbbbbb;
-        }
-
-        .tabs {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 30px;
-            gap: 10px;
-        }
-
-        .tab-btn {
-            padding: 12px 24px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 25px;
-            color: white;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .tab-btn.active {
-            background: #64b5f6;
-            box-shadow: 0 0 20px rgba(100, 181, 246, 0.4);
-        }
-
-        .tab-btn:hover {
-            background: rgba(100, 181, 246, 0.3);
-        }
-
-        .tab-content {
-            display: none;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 30px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            color: #64b5f6;
-            font-weight: 500;
-        }
-
-        .form-group input,
-        .form-group select {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 8px;
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            font-size: 16px;
-            transition: all 0.3s ease;
-        }
-
-        .form-group input:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: #64b5f6;
-            box-shadow: 0 0 10px rgba(100, 181, 246, 0.3);
-        }
-
-        .btn {
-            background: linear-gradient(45deg, #64b5f6, #42a5f5);
-            color: white;
-            padding: 12px 30px;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(100, 181, 246, 0.3);
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(100, 181, 246, 0.4);
-        }
-
-        .btn:active {
-            transform: translateY(0);
-        }
-
-        .cazador-card {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 15px;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-        }
-
-        .cazador-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-        }
-
-        .cazador-nombre {
-            font-size: 1.5rem;
-            color: #64b5f6;
-            margin-bottom: 10px;
-        }
-
-        .cazador-info {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 10px;
-        }
-
-        .info-item {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 10px;
-            border-radius: 8px;
-        }
-
-        .info-label {
-            color: #bbbbbb;
-            font-size: 0.9rem;
-        }
-
-        .info-value {
-            color: white;
-            font-weight: 500;
-        }
-
-        .mensaje {
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            font-weight: 500;
-        }
-
-        .mensaje.exito {
-            background: rgba(76, 175, 80, 0.2);
-            border: 1px solid #4caf50;
-            color: #4caf50;
-        }
-
-        .mensaje.error {
-            background: rgba(244, 67, 54, 0.2);
-            border: 1px solid #f44336;
-            color: #f44336;
-        }
-
-        .loading {
-            text-align: center;
-            color: #64b5f6;
-            font-size: 1.2rem;
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .stat-card {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 20px;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .stat-number {
-            font-size: 2rem;
-            color: #64b5f6;
-            font-weight: bold;
-        }
-
-        .stat-label {
-            color: #bbbbbb;
-            margin-top: 5px;
-        }
-
-        @media (max-width: 768px) {
-            .header h1 {
-                font-size: 2rem;
-            }
-
-            .tabs {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .cazador-info {
-                grid-template-columns: 1fr;
-            }
-        }
+        *{margin:0;padding:0;box-sizing:border-box}body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%);color:#ffffff;min-height:100vh;padding:20px}.container{max-width:1200px;margin:0 auto}.header{text-align:center;margin-bottom:40px;padding:20px;background:rgba(255,255,255,0.1);border-radius:15px;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.2)}.header h1{font-size:3rem;color:#64b5f6;margin-bottom:10px;text-shadow:0 0 20px rgba(100,181,246,0.5)}.header p{font-size:1.2rem;color:#bbbbbb}.tabs{display:flex;justify-content:center;margin-bottom:30px;gap:10px}.tab-btn{padding:12px 24px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:25px;color:white;cursor:pointer;transition:all 0.3s ease}.tab-btn.active{background:#64b5f6;box-shadow:0 0 20px rgba(100,181,246,0.4)}.tab-btn:hover{background:rgba(100,181,246,0.3)}.tab-content{display:none;background:rgba(255,255,255,0.1);border-radius:15px;padding:30px;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.2)}.tab-content.active{display:block}.form-group{margin-bottom:20px}.form-group label{display:block;margin-bottom:5px;color:#64b5f6;font-weight:500}.form-group input,.form-group select{width:100%;padding:12px;border:1px solid rgba(255,255,255,0.3);border-radius:8px;background:rgba(255,255,255,0.1);color:white;font-size:16px;transition:all 0.3s ease}.form-group input:focus,.form-group select:focus{outline:none;border-color:#64b5f6;box-shadow:0 0 10px rgba(100,181,246,0.3)}.btn{background:linear-gradient(45deg,#64b5f6,#42a5f5);color:white;padding:12px 30px;border:none;border-radius:25px;cursor:pointer;font-size:16px;transition:all 0.3s ease;box-shadow:0 4px 15px rgba(100,181,246,0.3)}.btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(100,181,246,0.4)}.btn:active{transform:translateY(0)}.cazador-card{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:15px;padding:20px;margin-bottom:15px;backdrop-filter:blur(10px);transition:all 0.3s ease}.cazador-card:hover{transform:translateY(-5px);box-shadow:0 10px 25px rgba(0,0,0,0.2)}.cazador-nombre{font-size:1.5rem;color:#64b5f6;margin-bottom:10px}.cazador-info{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}.info-item{background:rgba(255,255,255,0.05);padding:10px;border-radius:8px}.info-label{color:#bbbbbb;font-size:0.9rem}.info-value{color:white;font-weight:500}.mensaje{padding:15px;border-radius:8px;margin-bottom:20px;font-weight:500}.mensaje.exito{background:rgba(76,175,80,0.2);border:1px solid #4caf50;color:#4caf50}.mensaje.error{background:rgba(244,67,54,0.2);border:1px solid #f44336;color:#f44336}.loading{text-align:center;color:#64b5f6;font-size:1.2rem}.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;margin-bottom:30px}.stat-card{background:rgba(255,255,255,0.1);border-radius:15px;padding:20px;text-align:center;border:1px solid rgba(255,255,255,0.2)}.stat-number{font-size:2rem;color:#64b5f6;font-weight:bold}.stat-label{color:#bbbbbb;margin-top:5px}@media(max-width:768px){.header h1{font-size:2rem}.tabs{flex-direction:column;align-items:center}.cazador-info{grid-template-columns:1fr}}
     </style>
 </head>
-
 <body>
     <div class="container">
         <div class="header">
@@ -256,14 +16,12 @@
         </div>
 
         <div class="tabs">
-            <button class="tab-btn active" onclick="cambiarTab('registro')"> Registrar Cazador</button>
-            <button class="tab-btn" onclick="cambiarTab('lista')"> Lista de Cazadores</button>
-            <button class="tab-btn" onclick="cambiarTab('mision')"> Asignar Misión</button>
+            <button class="tab-btn active" onclick="cambiarTab('registro')">Registrar Cazador</button>
+            <button class="tab-btn" onclick="cambiarTab('lista')">Lista de Cazadores</button>
         </div>
 
-        <!-- Tab Registrar Cazador -->
         <div id="registro" class="tab-content active">
-            <h2 style="color: #64b5f6; margin-bottom: 20px;">Registrar Nuevo Cazador</h2>
+            <h2 style="color:#64b5f6;margin-bottom:20px;">Registrar Nuevo Cazador</h2>
             <div id="mensaje-registro"></div>
             <form id="form-registro" onsubmit="registrarCazador(event)">
                 <div class="form-group">
@@ -273,7 +31,7 @@
 
                 <div class="form-group">
                     <label for="rango">Rango</label>
-                    <select id="rango" name="rango" required>
+                    <select id="rango" name="rango">
                         <option value="">Selecciona un rango</option>
                         <option value="Stellaris Phantasm">Stellaris Phantasm</option>
                         <option value="Havoc Extinction">Havoc Extinction</option>
@@ -282,244 +40,104 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="estiloDeRespiracion">Estilo de Respiración</label>
-                    <select id="estiloDeRespiracion" name="estiloDeRespiracion" required>
+                    <label for="respiracion">Estilo de Respiración</label>
+                    <select id="respiracion" name="respiracion" required>
                         <option value="">Selecciona un estilo</option>
                         <option value="Respiración del Agua">Respiración del Agua</option>
-                        <option value="Respiración del Frio">Respiración del Frío</option>
+                        <option value="Respiración del Frío">Respiración del Frío</option>
+                        <option value="Respiración de las Rocas">Respiración de las Rocas</option>
+                    </select>
                 </div>
 
                 <button type="submit" class="btn">Registrar Cazador</button>
             </form>
         </div>
 
-        <!-- Tab Lista de Cazadores -->
         <div id="lista" class="tab-content">
-            <div class="stats" id="stats">
+            <div class="stats">
                 <div class="stat-card">
                     <div class="stat-number" id="total-cazadores">0</div>
                     <div class="stat-label">Total Cazadores</div>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-number" id="total-misiones">0</div>
-                    <div class="stat-label">Misiones Completadas</div>
-                </div>
             </div>
 
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                <h2 style="color: #64b5f6;">Lista de Cazadores</h2>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+                <h2 style="color:#64b5f6;">Lista de Cazadores</h2>
                 <button class="btn" onclick="cargarCazadores()">🔄 Actualizar</button>
             </div>
 
-            <div id="lista-cazadores">
-                <div class="loading">Cargando cazadores...</div>
-            </div>
-        </div>
-
-        <!-- Tab Asignar Misión -->
-        <div id="mision" class="tab-content">
-            <h2 style="color: #64b5f6; margin-bottom: 20px;">Asignar Misión</h2>
-            <div id="mensaje-mision"></div>
-            <form id="form-mision" onsubmit="asignarMision(event)">
-                <div class="form-group">
-                    <label for="nombreCazador">Nombre del Cazador</label>
-                    <select id="nombreCazador" name="nombreCazador" required>
-                        <option value="">Selecciona un cazador</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="nombreDemonio">Nombre del Demonio</label>
-                    <input type="text" id="nombreDemonio" name="nombreDemonio" required
-                        placeholder="Ej: Muzan Kibutsuji">
-                </div>
-
-                <button type="submit" class="btn">⚔️ Asignar Misión</button>
-            </form>
+            <div id="lista-cazadores"><div class="loading">Cargando cazadores...</div></div>
         </div>
     </div>
 
     <script>
-        // Variables globales
-        let cazadores = [];
-
-        // Función para cambiar de tab
         function cambiarTab(tabName) {
-            // Ocultar todos los tabs
-            document.querySelectorAll('.tab-content').forEach(tab => {
-                tab.classList.remove('active');
-            });
-
-            // Remover clase active de todos los botones
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-
-            // Mostrar el tab seleccionado
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
             document.getElementById(tabName).classList.add('active');
-
-            // Activar el botón correspondiente
             event.target.classList.add('active');
-
-            // Cargar datos específicos del tab
-            if (tabName === 'lista') {
-                cargarCazadores();
-            } else if (tabName === 'mision') {
-                cargarCazadoresParaMision();
-            }
+            if (tabName === 'lista') cargarCazadores();
         }
 
-        // Función para registrar cazador
         async function registrarCazador(event) {
             event.preventDefault();
-
             const formData = new FormData(event.target);
             const data = Object.fromEntries(formData);
-
             try {
-                const response = await fetch('/registrar-cazador', {
+                const res = await fetch('/registrar', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(data)
                 });
-
-                const result = await response.json();
-
+                const result = await res.json();
                 mostrarMensaje('mensaje-registro', result.mensaje, result.exito ? 'exito' : 'error');
-
-                if (result.exito) {
-                    document.getElementById('form-registro').reset();
-                }
-
-            } catch (error) {
+                if (result.exito) event.target.reset();
+            } catch {
                 mostrarMensaje('mensaje-registro', 'Error de conexión con el servidor', 'error');
             }
         }
 
-        // Función para cargar cazadores
         async function cargarCazadores() {
             try {
-                const response = await fetch('/cazadores');
-                const data = await response.json();
-                cazadores = data.cazadores;
-
-                mostrarCazadores(cazadores);
-                actualizarEstadisticas(cazadores);
-
-            } catch (error) {
-                document.getElementById('lista-cazadores').innerHTML =
-                    '<div class="mensaje error">Error al cargar cazadores</div>';
+                const res = await fetch('/cazadores');
+                const data = await res.json();
+                mostrarCazadores(data.cazadores);
+                document.getElementById('total-cazadores').textContent = data.cazadores.length;
+            } catch {
+                document.getElementById('lista-cazadores').innerHTML = '<div class="mensaje error">Error al cargar cazadores</div>';
             }
         }
 
-        // Función para mostrar cazadores
         function mostrarCazadores(cazadores) {
             const container = document.getElementById('lista-cazadores');
-
             if (cazadores.length === 0) {
                 container.innerHTML = '<div class="mensaje">No hay cazadores registrados</div>';
                 return;
             }
-
-            const html = cazadores.map(cazador => `
+            container.innerHTML = cazadores.map(c => `
                 <div class="cazador-card">
-                    <div class="cazador-nombre">${cazador.nombre}</div>
+                    <div class="cazador-nombre">${c.nombre}</div>
                     <div class="cazador-info">
                         <div class="info-item">
                             <div class="info-label">Rango</div>
-                            <div class="info-value">${cazador.rango}</div>
+                            <div class="info-value">${c.rango || '—'}</div>
                         </div>
                         <div class="info-item">
-                            <div class="info-label">Estilo de Respiración</div>
-                            <div class="info-value">${cazador.estiloDeRespiracion}</div>
-                        </div>
-                        <div class="info-item">
-                            <div class="info-label">Misiones Completadas</div>
-                            <div class="info-value">${cazador.misionesCompletadas}</div>
+                            <div class="info-label">Respiración</div>
+                            <div class="info-value">${c.respiracion}</div>
                         </div>
                     </div>
                 </div>
             `).join('');
-
-            container.innerHTML = html;
         }
 
-        // Función para actualizar estadísticas
-        function actualizarEstadisticas(cazadores) {
-            const totalMisiones = cazadores.reduce((total, cazador) => total + cazador.misionesCompletadas, 0);
-
-            document.getElementById('total-cazadores').textContent = cazadores.length;
-            document.getElementById('total-misiones').textContent = totalMisiones;
+        function mostrarMensaje(id, msg, tipo) {
+            const e = document.getElementById(id);
+            e.innerHTML = `<div class="mensaje ${tipo}">${msg}</div>`;
+            setTimeout(() => e.innerHTML = '', 5000);
         }
 
-        // Función para cargar cazadores en el select de misiones
-        async function cargarCazadoresParaMision() {
-            try {
-                const response = await fetch('/cazadores');
-                const data = await response.json();
-                const select = document.getElementById('nombreCazador');
-
-                select.innerHTML = '<option value="">Selecciona un cazador</option>';
-
-                data.cazadores.forEach(cazador => {
-                    const option = document.createElement('option');
-                    option.value = cazador.nombre;
-                    option.textContent = `${cazador.nombre} (${cazador.rango})`;
-                    select.appendChild(option);
-                });
-
-            } catch (error) {
-                console.error('Error al cargar cazadores:', error);
-            }
-        }
-
-        // Función para asignar misión
-        async function asignarMision(event) {
-            event.preventDefault();
-
-            const formData = new FormData(event.target);
-            const data = Object.fromEntries(formData);
-
-            try {
-                const response = await fetch('/asignar-mision', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(data)
-                });
-
-                const result = await response.json();
-
-                mostrarMensaje('mensaje-mision', result.mensaje, result.exito ? 'exito' : 'error');
-
-                if (result.exito) {
-                    document.getElementById('form-mision').reset();
-                }
-
-            } catch (error) {
-                mostrarMensaje('mensaje-mision', 'Error de conexión con el servidor', 'error');
-            }
-        }
-
-        // Función para mostrar mensajes
-        function mostrarMensaje(elementId, mensaje, tipo) {
-            const element = document.getElementById(elementId);
-            element.innerHTML = `<div class="mensaje ${tipo}">${mensaje}</div>`;
-
-            // Limpiar mensaje después de 5 segundos
-            setTimeout(() => {
-                element.innerHTML = '';
-            }, 5000);
-        }
-
-        // Cargar datos iniciales
-        document.addEventListener('DOMContentLoaded', () => {
-            cargarCazadores();
-        });
+        document.addEventListener('DOMContentLoaded', cargarCazadores);
     </script>
 </body>
-
 </html>
