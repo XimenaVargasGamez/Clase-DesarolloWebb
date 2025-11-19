@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "../../.."
+		},
+		{
+			"path": "../../../../../Downloads/clase-mongodb"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "Clase-DesarolloWebb"
+	}
+}
